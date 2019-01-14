@@ -17,7 +17,8 @@ RUN apt-get install -y --no-install-recommends \
         pciutils \
         python3.5 \
         python3-pip \
-        sudo 
+        python3-setuptools \
+        sudo
 
 # installing OpenVINO dependencies
 RUN cd /app/l_openvino_toolkit* && \
