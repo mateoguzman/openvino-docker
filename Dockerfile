@@ -31,4 +31,6 @@ RUN cd /app/l_openvino_toolkit* && \
 
 RUN /bin/bash -c "source $INSTALL_DIR/bin/setupvars.sh"
 
+RUN echo "source $INSTALL_DIR/bin/setupvars.sh" >> /root/.bashrc
+
 CMD ["/bin/bash"]
