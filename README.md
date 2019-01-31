@@ -5,7 +5,7 @@ Openvino environment with docker
 
 You can register and download it from : https://software.intel.com/en-us/openvino-toolkit/choose-download/free-download-linux
 
-Or use wget to ghte the 2018 Release 5 directly
+Or use wget to get the 2018 Release 5 directly
 
 $ wget http://registrationcenter-download.intel.com/akdlm/irc_nas/15013/l_openvino_toolkit_p_2018.5.445.tgz
 
