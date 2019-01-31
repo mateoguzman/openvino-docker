@@ -1,6 +1,6 @@
 FROM ubuntu:16.04
 
-ADD . /openvino
+ADD l_openvino_toolkit* /openvino/
 
 ARG INSTALL_DIR=/opt/intel/computer_vision_sdk
 
