@@ -31,6 +31,10 @@ RUN cd /openvino/l_openvino_toolkit* && \
     sed -i 's/decline/accept/g' silent.cfg && \
     ./install.sh --silent silent.cfg
 
+# Model Optimizer
+RUN cd $INSTALL_DIR/deployment_tools/model_optimizer/install_prerequisites && \
+    ./install_prerequisites.sh
+
 # clean up 
 RUN apt autoremove -y && \
     rm -rf /openvino /var/lib/apt/lists/*
