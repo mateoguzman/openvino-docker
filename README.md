@@ -27,7 +27,7 @@ $ tar -xf l_openvino_toolkit*
 ### Build the image
 
 ```
-$ docekr build -t openvino . 
+$ docker build -t openvino . 
 ```
 
 ## Using the image 
