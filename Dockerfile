@@ -21,13 +21,13 @@ RUN apt-get install -y --no-install-recommends \
         sudo
 
 # installing OpenVINO dependencies
-RUN cd /openvino/l_openvino_toolkit* && \
+RUN cd /openvino/ && \
     ./install_cv_sdk_dependencies.sh
 
 RUN pip3 install numpy
 
 # installing OpenVINO itself
-RUN cd /openvino/l_openvino_toolkit* && \
+RUN cd /openvino/ && \
     sed -i 's/decline/accept/g' silent.cfg && \
     ./install.sh --silent silent.cfg
 
