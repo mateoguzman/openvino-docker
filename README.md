@@ -13,10 +13,10 @@ The firt thing you need is to download the OpenVINO(tm) toolkit.
 You can register and download it from the following link (Linux version):
 [https://software.intel.com/en-us/openvino-toolkit/choose-download/free-download-linux](https://software.intel.com/en-us/openvino-toolkit/choose-download/free-download-linux)
 
-Or use wget to get the package directly (Latest version is 2019 R1.1 by the time writing this guide)
+Or use wget to get the package directly (Latest version is 2019 R3 by the time writing this guide)
 
 ``` bash
-wget http://registrationcenter-download.intel.com/akdlm/irc_nas/15512/l_openvino_toolkit_p_2019.1.144.tgz
+wget http://registrationcenter-download.intel.com/akdlm/irc_nas/15944/l_openvino_toolkit_p_2019.3.334.tgz 
 ```
 
 ### Extract the file in the root folder  
