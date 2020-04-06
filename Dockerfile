@@ -14,8 +14,8 @@ RUN apt-get install -y --no-install-recommends \
         git \
         lsb-release \
         pciutils \
-        python3.5 \
-        python3.5-dev \
+        python3 \
+        python3-dev \
         python3-pip \
         python3-setuptools \
         sudo
@@ -25,6 +25,7 @@ RUN cd /openvino/ && \
     ./install_openvino_dependencies.sh
 
 RUN pip3 install numpy
+RUN pip3 install wheel
 
 # installing OpenVINO itself
 RUN cd /openvino/ && \
