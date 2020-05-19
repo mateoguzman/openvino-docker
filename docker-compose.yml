@@ -1,0 +1,50 @@
+version: '3.4'
+services:
+  openvino-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: openvino-dev:2020.2.130
+    stdin_open: true
+    tty: true
+    command: bash
+
+  openvino-runtime:
+    build:
+      context: .
+      dockerfile: Dockerfile-runtime
+    image: openvino-runtime:2020.2.130
+    stdin_open: true
+    tty: true
+    command: bash
+
+  sampleapp-dev:
+    build:
+      context: ./sample-app
+      dockerfile: Dockerfile
+      target: sampleapp-dev
+    image: sampleapp-dev
+    stdin_open: true
+    tty: true
+    command: bash
+    volumes:
+      - $HOME/.Xauthority:/root/.Xauthority
+    network_mode: host
+    environment:
+      - DISPLAY
+
+  sampleapp-runtime:
+    build:
+      context: ./sample-app
+      dockerfile: Dockerfile
+      target: sampleapp-runtime
+    image: sampleapp-runtime
+    stdin_open: true
+    tty: true
+    command: bash /app/run.sh
+    volumes:
+      - $HOME/.Xauthority:/root/.Xauthority
+    network_mode: host
+    environment:
+      - DISPLAY
+  

@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 
-ARG PACKAGE=intel-openvino-dev-ubuntu18-2020.2.130
+ARG PACKAGE=intel-openvino-runtime-ubuntu18-2020.2.130
 
 RUN apt-get update && apt-get -y upgrade
 RUN apt-get install -y --no-install-recommends \
@@ -17,7 +17,7 @@ RUN apt-get update && \
   apt-get install -y --no-install-recommends \
     $PACKAGE && \
   apt autoremove -y && \
-  rm -rf /var/lib/apt/lists/*
+  rm -rf /openvino /var/lib/apt/lists/*
 
 RUN /bin/bash -c "source /opt/intel/openvino/bin/setupvars.sh"
 

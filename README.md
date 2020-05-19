@@ -1,64 +1,86 @@
-# openvino-docker
+# OpenVINO Docker
 
-Intel® OpenVINO™ Toolkit environment
+Collection of Dockerfiles that will provide you with a base environment to build and run your inference models with [Intel® OpenVINO™ Toolkit](https://docs.openvinotoolkit.org/)
 
-This Dockerfile will provide you with a base environment to run your inference models with OpenVINO™.
+OpenVINO can be installed downloading the installation files from the official web, using the [Docker Hub images](https://hub.docker.com/u/openvino), using YUM or APT packages.
 
-## Building the Docker Image
+These Dockerfiles uses the APT package on top of Ubuntu 18.04
 
-### Download Intel® OpenVINO™ Toolkit
-
-The firt thing you need is to download the OpenVINO(tm) toolkit.
-
-You can register and download it from the following link (Linux version):
-[https://software.intel.com/en-us/openvino-toolkit/choose-download/free-download-linux](https://software.intel.com/en-us/openvino-toolkit/choose-download/free-download-linux)
-
-Or use wget to get the package directly (Latest version is 2020 1 by the time writing this guide)
+## Building the Docker Images
 
 ``` bash
-wget http://registrationcenter-download.intel.com/akdlm/irc_nas/16345/l_openvino_toolkit_p_2020.1.023.tgz
+docker-compose build
 ```
 
-### Extract the file in the root folder
+This will build the following images:
 
 ``` bash
-tar -xf l_openvino_toolkit*
+REPOSITORY                          TAG                 IMAGE ID            CREATED             SIZE
+sampleapp-runtime                   latest              199338615d9e        2 minutes ago       317MB
+sampleapp-dev                       latest              99298ab0a7e3        3 minutes ago       1.68GB
+openvino-dev                        2020.2.130          e1462a646c16        4 minutes ago       664MB
+openvino-runtime                    2020.2.130          f9b55d3ad15e        5 minutes ago       562MB
+ubuntu                              18.04               c3c304cb4f22        3 weeks ago         64.2MB
 ```
 
-### Build the image
+* **ubuntu**: is the base image
+* **openvino-runtime**: is the runtime OpenVINO image based on APT package *intel-openvino-runtime-ubuntu18-2020 2.130*. Includes the following modules:
 
 ``` bash
-docker build -t openvino .
-```
+  Depends: intel-openvino-docs-2020.2.130
+  Depends: intel-openvino-eula-2020.2.130
+  Depends: intel-openvino-gstreamer-rt-ubuntu-bionic-2020.2.130
+  Depends: intel-openvino-gva-rt-ubuntu-bionic-2020.2.130
+  Depends: intel-openvino-ie-rt-2020.2.130
+  Depends: intel-openvino-ie-rt-core-ubuntu-bionic-2020.2.130
+  Depends: intel-openvino-ie-rt-cpu-ubuntu-bionic-2020.2.130
+  Depends: intel-openvino-ie-rt-gna-ubuntu-bionic-2020.2.130
+  Depends: intel-openvino-ie-rt-gpu-ubuntu-bionic-2020.2.130
+  Depends: intel-openvino-ie-rt-hddl-ubuntu-bionic-2020.2.130
+  Depends: intel-openvino-ie-rt-vpu-ubuntu-bionic-2020.2.130
+  Depends: intel-openvino-ie-sdk-ubuntu-bionic-2020.2.130
+  Depends: intel-openvino-opencv-generic-2020.2.130
+  Depends: intel-openvino-opencv-lib-ubuntu-bionic-2020.2.130
+  Depends: intel-openvino-setupvars-2020.2.130
+  ```
+
+* **openvino-dev**: is the development OpenVINO image including all the components and based on APT package *intel-openvino-dev-ubuntu18-2020.2.130*. Inludes the *openvino-runtime* modules with the addition of:
+
+``` bash
+  Depends: intel-openvino-dl-workbench-2020.2.130
+  Depends: intel-openvino-gva-dev-ubuntu-bionic-2020.2.130
+  Depends: intel-openvino-gva-sdk-2020.2.130
+  Depends: intel-openvino-ie-bin-python-tools-ubuntu-bionic-2020.2.130
+  Depends: intel-openvino-ie-samples-2020.2.130
+  Depends: intel-openvino-model-optimizer-2020.2.130
+  Depends: intel-openvino-omz-dev-2020.2.130
+  Depends: intel-openvino-omz-tools-2020.2.130
+  Depends: intel-openvino-opencv-etc-2020.2.130
+  Depends: intel-openvino-pot-2020.2.130
+  ```
+
+* **sampleapp**: is a sample application using the OpenVINO Toolkig.
 
 ## Using the image
 
-### Run a container
+### Run a sample application
 
-You can directly run a container based on this image or use this image across other images.
-
-To run a container based on this image:
+We will run the [security barrier demo](https://docs.openvinotoolkit.org/2020.2/_demos_security_barrier_camera_demo_README.html) shipped with OpenVINO in a separate container.
 
 ``` bash
-docker run -ti openvino /bin/bash
+docker-compose run sampleapp-runtime
 ```
-
-### Use the image in another container
-
-You can use this Docker image as a base image and use it in multiple Dockerfiles. An example of how to do this has been provided:
-
-Move to sample-app directory and build the image
+The inference output should be visible in the terminal:
 
 ``` bash
-cd sample-app
-docker build -t sample-app .
+
 ```
 
 ### Run the the container with X enabled (Linux)
 
-Additionally, for running a sample application that displays an image, you need to share the host display to be accessed from guest Docker container.
+This sample uses OpenCV to desplay the resulting frame with detections rendered as bounding boxes and text. For running a sample application that displays an image, you need to share the host display to be accessed from guest Docker container.
 
-The X server on the host should be enabled for remote connections:
+First the X server on the host should be enabled for remote connections (note that this turns off access control):
 
 ``` bash
 xhost +
@@ -70,34 +92,52 @@ The following flags needs to be added to the docker run command:
 * --env="DISPLAY"
 * --volume="$HOME/.Xauthority:/root/.Xauthority:rw"
 
-To run the sample-app image with the display enabled:
+This is already added in the docker-compose.yml:
 
 ``` bash
-docker run --net=host --env="DISPLAY" --volume="$HOME/.Xauthority:/root/.Xauthority:rw" -ti sample-app /bin/bash
+    volumes:
+      - $HOME/.Xauthority:/root/.Xauthority
+    network_mode: host
+    environment:
+      - DISPLAY
 ```
 
-Finally disable the remote connections to the X server
+When finished, disable the remote connections to the X server
 
 ``` bash
 xhost -
 ```
 
-### Run two demos
+### Use the image in another container
 
-Once inside the container, go to the Inference Engine demo directory:
+You can use this Docker image as a base image and use it in multiple Dockerfiles. Use multi-stage with *openvino-dev* and/or *openvino-runtime* image in your Dockerfile.
+
+In general, openvino-dev would be used when using:
+
+* Deep Learning Workbench
+* Gstreamer Video Analytics development and SDK
+* Infrence Engine Python tools and Samples
+* Model Optimizer
+* OpenVINO Model Zoo Tools
+* Intel® Post Training Optimization Tool
+
+Otherwise, openvino-runtime may be used
 
 ``` bash
-cd /opt/intel/openvino/deployment_tools/demo
+## Development build
+FROM openvino-dev:2020.2.130 as sampleapp-dev
+
+RUN <Application build steps, Model Download, Model Optimization, etc>
+RUN <Deployment Tool>
+
+##  Runtime Build
+
+FROM ubuntu:18.04
+
+COPY --from=sampleapp-dev <Application Biuld>
+COPY --from=sampleapp-dev <Models and data>
+
+CMD ["/myapp"]
 ```
 
-Run the Image Classification demo:
-
-``` bash
-./demo_squeezenet_download_convert_run.sh
-```
-
-Run the inference pipeline demo:
-
-``` bash
-./demo_security_barrier_camera.sh
-```
+An example of this process is shown in sample-app folder
