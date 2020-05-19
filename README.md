@@ -70,9 +70,31 @@ We will run the [security barrier demo](https://docs.openvinotoolkit.org/2020.2/
 ``` bash
 docker-compose run sampleapp-runtime
 ```
+
 The inference output should be visible in the terminal:
 
 ``` bash
+$ docker-compose run sampleapp-runtime 
+[setupvars.sh] OpenVINO environment initialized
+[ INFO ] InferenceEngine: 0x7f8c44aaf030
+[ INFO ] Files were added: 1
+[ INFO ]     /opt/intel/openvino/deployment_tools/demo/car_1.bmp
+[ INFO ] Loading device CPU
+	CPU
+	MKLDNNPlugin version ......... 2.1
+	Build ........... 42025
+
+[ INFO ] Loading detection model to the CPU plugin
+[ INFO ] Loading Vehicle Attribs model to the CPU plugin
+[ INFO ] Loading Licence Plate Recognition (LPR) model to the CPU plugin
+[ INFO ] Number of InferRequests: 1 (detection), 3 (classification), 3 (recognition)
+[ INFO ] 4 streams for CPU
+[ INFO ] Display resolution: 1920x1080
+[ INFO ] Number of allocated frames: 3
+[ INFO ] Resizable input with support of ROI crop and auto resize is disabled
+Invalid MIT-MAGIC-COOKIE-1 keyUnable to init server: Could not connect: Connection refused
+
+(Detection results:13): Gtk-WARNING **: 08:35:06.722: cannot open display: :0
 
 ```
 
@@ -101,6 +123,10 @@ This is already added in the docker-compose.yml:
     environment:
       - DISPLAY
 ```
+
+Now, run again the sample app and you will see the screen output
+
+![Inrefence](./img/car-inference.png)
 
 When finished, disable the remote connections to the X server
 
