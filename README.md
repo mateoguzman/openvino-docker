@@ -65,7 +65,7 @@ ubuntu                              18.04               c3c304cb4f22        3 we
 
 ### Run a sample application
 
-We will run the [security barrier demo](https://docs.openvinotoolkit.org/2020.2/_demos_security_barrier_camera_demo_README.html) shipped with OpenVINO in a separate container.
+We will run the [security barrier demo](https://docs.openvinotoolkit.org/2020.2/_demos_security_barrier_camera_demo_README.html) included with OpenVINO, in a separate container.
 
 ``` bash
 docker-compose run sampleapp-runtime

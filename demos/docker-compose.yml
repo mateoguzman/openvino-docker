@@ -1,0 +1,18 @@
+version: '3.4'
+
+services:
+  pedestrian-tracker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: pedestrian-tracker-dev
+    image: pedestrian-tracker-dev
+    stdin_open: true
+    tty: true
+    command: bash /app/pedestrian-tracker.sh
+    volumes:
+      - $HOME/.Xauthority:/root/.Xauthority
+    network_mode: host
+    environment:
+      - DISPLAY
+      - VIDEO
