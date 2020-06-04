@@ -16,47 +16,47 @@ This will build the following images:
 
 ``` bash
 REPOSITORY                          TAG                 IMAGE ID            CREATED             SIZE
-sampleapp-runtime                   latest              199338615d9e        2 minutes ago       317MB
-sampleapp-dev                       latest              99298ab0a7e3        3 minutes ago       1.68GB
-openvino-dev                        2020.2.130          e1462a646c16        4 minutes ago       664MB
-openvino-runtime                    2020.2.130          f9b55d3ad15e        5 minutes ago       562MB
+sampleapp-runtime                   latest              199338615d9e        2 minutes ago       375MB
+sampleapp-dev                       latest              99298ab0a7e3        3 minutes ago       1.74GB
+openvino-dev                        2020.3.194          e1462a646c16        4 minutes ago       710MB
+openvino-runtime                    2020.3.194          f9b55d3ad15e        5 minutes ago       562MB
 ubuntu                              18.04               c3c304cb4f22        3 weeks ago         64.2MB
 ```
 
 * **ubuntu**: is the base image
-* **openvino-runtime**: is the runtime OpenVINO image based on APT package *intel-openvino-runtime-ubuntu18-2020 2.130*. Includes the following modules:
+* **openvino-runtime**: is the runtime OpenVINO image based on APT package *intel-openvino-runtime-ubuntu18-2020 3.194*. Includes the following modules:
 
 ``` bash
-  Depends: intel-openvino-docs-2020.2.130
-  Depends: intel-openvino-eula-2020.2.130
-  Depends: intel-openvino-gstreamer-rt-ubuntu-bionic-2020.2.130
-  Depends: intel-openvino-gva-rt-ubuntu-bionic-2020.2.130
-  Depends: intel-openvino-ie-rt-2020.2.130
-  Depends: intel-openvino-ie-rt-core-ubuntu-bionic-2020.2.130
-  Depends: intel-openvino-ie-rt-cpu-ubuntu-bionic-2020.2.130
-  Depends: intel-openvino-ie-rt-gna-ubuntu-bionic-2020.2.130
-  Depends: intel-openvino-ie-rt-gpu-ubuntu-bionic-2020.2.130
-  Depends: intel-openvino-ie-rt-hddl-ubuntu-bionic-2020.2.130
-  Depends: intel-openvino-ie-rt-vpu-ubuntu-bionic-2020.2.130
-  Depends: intel-openvino-ie-sdk-ubuntu-bionic-2020.2.130
-  Depends: intel-openvino-opencv-generic-2020.2.130
-  Depends: intel-openvino-opencv-lib-ubuntu-bionic-2020.2.130
-  Depends: intel-openvino-setupvars-2020.2.130
+  Depends: intel-openvino-docs-2020.3.194
+  Depends: intel-openvino-eula-2020.3.194
+  Depends: intel-openvino-gstreamer-rt-ubuntu-bionic-2020.3.194
+  Depends: intel-openvino-gva-rt-ubuntu-bionic-2020.3.194
+  Depends: intel-openvino-ie-rt-2020.3.194
+  Depends: intel-openvino-ie-rt-core-ubuntu-bionic-2020.3.194
+  Depends: intel-openvino-ie-rt-cpu-ubuntu-bionic-2020.3.194
+  Depends: intel-openvino-ie-rt-gna-ubuntu-bionic-2020.3.194
+  Depends: intel-openvino-ie-rt-gpu-ubuntu-bionic-2020.3.194
+  Depends: intel-openvino-ie-rt-hddl-ubuntu-bionic-2020.3.194
+  Depends: intel-openvino-ie-rt-vpu-ubuntu-bionic-2020.3.194
+  Depends: intel-openvino-ie-sdk-ubuntu-bionic-2020.3.194
+  Depends: intel-openvino-opencv-generic-2020.3.194
+  Depends: intel-openvino-opencv-lib-ubuntu-bionic-2020.3.194
+  Depends: intel-openvino-setupvars-2020.3.194
   ```
 
-* **openvino-dev**: is the development OpenVINO image including all the components and based on APT package *intel-openvino-dev-ubuntu18-2020.2.130*. Inludes the *openvino-runtime* modules with the addition of:
+* **openvino-dev**: is the development OpenVINO image including all the components and based on APT package *intel-openvino-dev-ubuntu18-2020.3.194*. Inludes the *openvino-runtime* modules with the addition of:
 
 ``` bash
-  Depends: intel-openvino-dl-workbench-2020.2.130
-  Depends: intel-openvino-gva-dev-ubuntu-bionic-2020.2.130
-  Depends: intel-openvino-gva-sdk-2020.2.130
-  Depends: intel-openvino-ie-bin-python-tools-ubuntu-bionic-2020.2.130
-  Depends: intel-openvino-ie-samples-2020.2.130
-  Depends: intel-openvino-model-optimizer-2020.2.130
-  Depends: intel-openvino-omz-dev-2020.2.130
-  Depends: intel-openvino-omz-tools-2020.2.130
-  Depends: intel-openvino-opencv-etc-2020.2.130
-  Depends: intel-openvino-pot-2020.2.130
+  Depends: intel-openvino-dl-workbench-2020.3.194
+  Depends: intel-openvino-gva-dev-ubuntu-bionic-2020.3.194
+  Depends: intel-openvino-gva-sdk-2020.3.194
+  Depends: intel-openvino-ie-bin-python-tools-ubuntu-bionic-2020.3.194
+  Depends: intel-openvino-ie-samples-2020.3.194
+  Depends: intel-openvino-model-optimizer-2020.3.194
+  Depends: intel-openvino-omz-dev-2020.3.194
+  Depends: intel-openvino-omz-tools-2020.3.194
+  Depends: intel-openvino-opencv-etc-2020.3.194
+  Depends: intel-openvino-pot-2020.3.194
   ```
 
 * **sampleapp**: is a sample application using the OpenVINO Toolkig.
@@ -151,7 +151,7 @@ Otherwise, openvino-runtime may be used
 
 ``` bash
 ## Development build
-FROM openvino-dev:2020.2.130 as sampleapp-dev
+FROM openvino-dev:2020.3.194 as sampleapp-dev
 
 RUN <Application build steps, Model Download, Model Optimization, etc>
 RUN <Deployment Tool>

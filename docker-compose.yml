@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: openvino-dev:2020.2.130
+    image: openvino-dev:2020.3.194
     stdin_open: true
     tty: true
     command: bash
@@ -13,7 +13,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-runtime
-    image: openvino-runtime:2020.2.130
+    image: openvino-runtime:2020.3.194
     stdin_open: true
     tty: true
     command: bash

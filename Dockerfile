@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 
-ARG PACKAGE=intel-openvino-dev-ubuntu18-2020.2.130
+ARG PACKAGE=intel-openvino-dev-ubuntu18-2020.3.194
 
 RUN apt-get update && apt-get -y upgrade
 RUN apt-get install -y --no-install-recommends \

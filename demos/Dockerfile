@@ -1,4 +1,4 @@
-FROM openvino-dev:2020.2.130 as pedestrian-tracker-dev
+FROM openvino-dev:2020.3.194 as pedestrian-tracker-dev
 
 #Install needed dependences
 RUN apt-get update && apt-get -y upgrade && apt-get autoremove -y
