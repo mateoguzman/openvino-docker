@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VIDEO="${VIDEO:-/app/videos/store.mp4}"
+VIDEO="${VIDEO:-/app/videos/stairs.mp4}"
 
 source /opt/intel/openvino/bin/setupvars.sh && \
     /root/omz_demos_build/intel64/Release/pedestrian_tracker_demo \

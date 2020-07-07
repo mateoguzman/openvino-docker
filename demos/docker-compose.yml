@@ -3,16 +3,36 @@ version: '3.4'
 services:
   pedestrian-tracker:
     build:
-      context: .
+      context: ./pedestrian-tracker
       dockerfile: Dockerfile
-      target: pedestrian-tracker-dev
     image: pedestrian-tracker-dev
     stdin_open: true
     tty: true
     command: bash /app/pedestrian-tracker.sh
     volumes:
       - $HOME/.Xauthority:/root/.Xauthority
+      - ./videos:/app/videos
     network_mode: host
+    devices:
+      - /dev/video0:/dev/video0
+    environment:
+      - DISPLAY
+      - VIDEO
+
+  face-recognition:
+    build:
+      context: ./face-recognition
+      dockerfile: Dockerfile
+    image: face-recognition-dev
+    stdin_open: true
+    tty: true
+    command: bash /app/face-recognition.sh
+    volumes:
+      - $HOME/.Xauthority:/root/.Xauthority
+      - ./videos:/app/videos
+    network_mode: host
+    devices:
+      - /dev/video0:/dev/video0
     environment:
       - DISPLAY
       - VIDEO
