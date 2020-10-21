@@ -1,4 +1,4 @@
-FROM openvino-dev:2020.4 as sampleapp-dev
+FROM openvino-dev:2021.1 as sampleapp-dev
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
   libgtk-3.0 \
