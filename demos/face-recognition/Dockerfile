@@ -1,4 +1,4 @@
-FROM openvino-dev:2020.3.194
+FROM openvino-dev:2020.4
 
 #Install needed dependences
 RUN apt-get update && apt-get install -y --no-install-recommends \

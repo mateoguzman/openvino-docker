@@ -1,4 +1,4 @@
-FROM openvino-dev:2020.3.194
+FROM openvino-dev:2020.4
 
 #Install needed dependences
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -19,8 +19,10 @@ COPY pedestrian-tracker.sh /app/
 WORKDIR /opt/intel/openvino/deployment_tools/open_model_zoo/tools/downloader/
 RUN pip3 install -r requirements.in
 RUN ./downloader.py --name person-detection-retail-0013 --output_dir /app/models
-RUN ./downloader.py --name person-reidentification-retail-0300 --output_dir /app/models
-RUN ./downloader.py --name person-reidentification-retail-0031 --output_dir /app/models
+RUN ./downloader.py --name person-reidentification-retail-0270 --output_dir /app/models
+RUN ./downloader.py --name person-reidentification-retail-0248 --output_dir /app/models
+RUN ./downloader.py --name person-reidentification-retail-0265 --output_dir /app/models
+RUN ./downloader.py --name person-reidentification-retail-0267 --output_dir /app/models
 
 # Build Open Model Zoo demos
 RUN /opt/intel/openvino/deployment_tools/open_model_zoo/demos/build_demos.sh
